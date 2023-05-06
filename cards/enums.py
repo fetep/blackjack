@@ -2,6 +2,7 @@
 
 from enum import Enum, auto
 
+
 class Ranks(Enum):
     _A = auto()
     A = _A
@@ -25,6 +26,7 @@ class Ranks(Enum):
     # remove the leading '_'
     def __str__(self):
         return f'{self.name[-1]}'
+
 
 class Suits(Enum):
     CLUBS = auto()

@@ -3,9 +3,11 @@
 from cards import Shoe
 from hand import Hand
 
+
 class Blackjack:
     def __init__(self, decks):
         self.shoe = Shoe(decks)
+
 
 shoe = Shoe(decks=8)
 dealer = Hand(shoe)

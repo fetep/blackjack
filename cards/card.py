@@ -2,7 +2,10 @@
 
 from .enums import Ranks
 
-class InvalidCardException(Exception): pass
+
+class InvalidCardException(Exception):
+    pass
+
 
 class Card:
     def __init__(self, rank, suit):

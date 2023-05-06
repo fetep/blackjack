@@ -5,8 +5,8 @@ setuptools.setup(name='blackjack',
                  install_requires=[],
                  extras_require={
                      'dev': [
+                         'pycodestyle',
                          'pytest',
                          'pytest-cov',
-                         'pytest-pep8',
                         ]
                  })

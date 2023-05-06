@@ -5,7 +5,10 @@ import random
 from .card import Card
 from .enums import Ranks, Suits
 
-class ShoeException(Exception): pass
+
+class ShoeException(Exception):
+    pass
+
 
 class Shoe:
     def __init__(self, decks):
