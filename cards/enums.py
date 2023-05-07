@@ -5,7 +5,6 @@ from enum import Enum, auto
 
 class Ranks(Enum):
     _A = auto()
-    A = _A
     _2 = auto()
     _3 = auto()
     _4 = auto()
@@ -15,12 +14,15 @@ class Ranks(Enum):
     _8 = auto()
     _9 = auto()
     _T = auto()
-    T = _T
     _J = auto()
-    J = _J
     _Q = auto()
-    Q = _Q
     _K = auto()
+
+    # aliases
+    A = _A
+    T = _T
+    J = _J
+    Q = _Q
     K = _K
 
     # remove the leading '_'
