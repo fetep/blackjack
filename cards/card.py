@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from .enums import Ranks
+from .enums import Ranks, Suits
 
 
 class InvalidCardException(Exception):
@@ -8,7 +8,7 @@ class InvalidCardException(Exception):
 
 
 class Card:
-    def __init__(self, rank, suit):
+    def __init__(self, rank, suit=Suits.H):
         self.rank, self.suit = rank, suit
 
     def __str__(self):
@@ -45,4 +45,3 @@ class Card:
                 return 10
             case _:
                 return InvalidCardException(f'unknown rank {self.rank}')
-        return 10
