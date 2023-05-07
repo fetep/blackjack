@@ -1,17 +1,24 @@
 #!/usr/bin/env python
 
-from cards import Ranks
+from cards import Ranks, Shoe
 
 
 class Hand:
-    def __init__(self, shoe):
-        self.shoe = shoe
-        self.cards = []
-        self.cards.append(self.shoe.draw())
-        self.cards.append(self.shoe.draw())
+    # pass in a shoe to draw from or a list of cards
+    def __init__(self, cards):
+        if isinstance(cards, Shoe):
+            self.shoe = cards
+            self.cards = []
+            self.cards.append(self.shoe.draw())
+            self.cards.append(self.shoe.draw())
+        else:
+            self.shoe = None
+            self.cards = cards
 
     # add a card and return the new value
     def hit(self):
+        if self.shoe is None:
+            raise Exception('cannot hit without a shoe')
         self.cards.append(self.shoe.draw())
         return self.value()
 
