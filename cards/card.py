@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from functools import total_ordering
+
 from .enums import Ranks, Suits
 
 
@@ -7,6 +9,7 @@ class InvalidCardException(Exception):
     pass
 
 
+@total_ordering
 class Card:
     def __init__(self, rank, suit=Suits.H):
         self.rank, self.suit = rank, suit
@@ -45,3 +48,12 @@ class Card:
                 return 10
             case _:
                 return InvalidCardException(f'unknown rank {self.rank}')
+
+    def __eq__(self, other):
+        return (self.rank, self.suit) == (other.rank, other.suit)
+
+    def __lt__(self, other):
+        if self.suit == other.suit:
+            return self.rank.value < other.rank.value
+
+        return self.suit.value < other.suit.value
