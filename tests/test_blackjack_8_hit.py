@@ -48,35 +48,35 @@ class TestHand:
         return reduce(lambda a, b: a + b, list)
 
     # hard 5: hit against every dealer hand
-    def test_player_hard_5(self):
+    def test_hard_5(self):
         player = Hand([Card(Ranks._2), Card(Ranks._3)])
         assert player.value() == ('hard', 5)
 
         self.compare_actions(player, [Actions.HIT] * 10)
 
     # hard 6: hit against every dealer hand
-    def test_player_hard_6(self):
+    def test_hard_6(self):
         player = Hand([Card(Ranks._2), Card(Ranks._4)])
         assert player.value() == ('hard', 6)
 
         self.compare_actions(player, [Actions.HIT] * 10)
 
     # hard 7: hit against every dealer hand
-    def test_player_hard_7(self):
+    def test_hard_7(self):
         player = Hand([Card(Ranks._2), Card(Ranks._5)])
         assert player.value() == ('hard', 7)
 
         self.compare_actions(player, [Actions.HIT] * 10)
 
     # hard 8: hit against every dealer hand
-    def test_player_hard_8(self):
+    def test_hard_8(self):
         player = Hand([Card(Ranks._2), Card(Ranks._6)])
         assert player.value() == ('hard', 8)
 
         self.compare_actions(player, [Actions.HIT] * 10)
 
     # hard 9: double on dealer 3-6, hit the rest
-    def test_player_hard_9(self):
+    def test_hard_9(self):
         player = Hand([Card(Ranks._2), Card(Ranks._7)])
         assert player.value() == ('hard', 9)
 
@@ -94,7 +94,7 @@ class TestHand:
         ])
 
     # hard 10: hit on dealer T/A, double the rest
-    def test_player_hard_10(self):
+    def test_hard_10(self):
         player = Hand([Card(Ranks._2), Card(Ranks._8)])
         assert player.value() == ('hard', 10)
 
@@ -112,14 +112,14 @@ class TestHand:
         ])
 
     # hard 11: double on everything
-    def test_player_hard_11(self):
+    def test_hard_11(self):
         player = Hand([Card(Ranks._2), Card(Ranks._9)])
         assert player.value() == ('hard', 11)
 
         self.compare_actions(player, [Actions.DOUBLE] * 10)
 
     # hard 12: stay on dealer 4-7, hit on the rest
-    def test_player_hard_12(self):
+    def test_hard_12(self):
         player = Hand([Card(Ranks._2), Card(Ranks.T)])
         assert player.value() == ('hard', 12)
 
@@ -137,7 +137,7 @@ class TestHand:
         ])
 
     # hard 13: stand against bustable dealer hand, hit against made dealer hands
-    def test_player_hard_13(self):
+    def test_hard_13(self):
         player = Hand([Card(Ranks._3), Card(Ranks.T)])
         assert player.value() == ('hard', 13)
 
@@ -147,7 +147,7 @@ class TestHand:
         ]))
 
     # hard 14: stand against bustable dealer hand, hit against made dealer hands
-    def test_player_hard_14(self):
+    def test_hard_14(self):
         player = Hand([Card(Ranks._4), Card(Ranks.T)])
         assert player.value() == ('hard', 14)
 
@@ -157,7 +157,7 @@ class TestHand:
         ]))
 
     # hard 15: stand against bustable dealer hand, hit against made dealer hands
-    def test_player_hard_15(self):
+    def test_hard_15(self):
         player = Hand([Card(Ranks._5), Card(Ranks.T)])
         assert player.value() == ('hard', 15)
 
@@ -167,7 +167,7 @@ class TestHand:
         ]))
 
     # hard 16: stand against bustable dealer hand, hit against made dealer hands
-    def test_player_hard_16(self):
+    def test_hard_16(self):
         player = Hand([Card(Ranks._6), Card(Ranks.T)])
         assert player.value() == ('hard', 16)
 
@@ -177,28 +177,28 @@ class TestHand:
         ]))
 
     # hard 17: stand against anything
-    def test_player_hard_17(self):
+    def test_hard_17(self):
         player = Hand([Card(Ranks._7), Card(Ranks.T)])
         assert player.value() == ('hard', 17)
 
         self.compare_actions(player, [Actions.STAND] * 10)
 
     # hard 18: stand against anything
-    def test_player_hard_18(self):
+    def test_hard_18(self):
         player = Hand([Card(Ranks._8), Card(Ranks.T)])
         assert player.value() == ('hard', 18)
 
         self.compare_actions(player, [Actions.STAND] * 10)
 
     # hard 19: stand against anything
-    def test_player_hard_19(self):
+    def test_hard_19(self):
         player = Hand([Card(Ranks._9), Card(Ranks.T)])
         assert player.value() == ('hard', 19)
 
         self.compare_actions(player, [Actions.STAND] * 10)
 
     # hard 20: stand against anything
-    def test_player_hard_20(self):
+    def test_hard_20(self):
         player = Hand([Card(Ranks.K), Card(Ranks.T)])
         assert player.value() == ('hard', 20)
 
