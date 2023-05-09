@@ -7,6 +7,9 @@
 # - surrender: not allowed
 # - dealer peek: dealer peeks for blackjack
 
+from functools import reduce
+from pytest_check import check
+
 from blackjack import Actions, Hand, Strategy
 from cards import Card, Ranks
 
@@ -31,12 +34,18 @@ class TestHand:
             raise Exception('mismatch between actions and dealer_hands length')
 
         player_type, player_value = player.value()
-
         for i, expected_action in enumerate(actions):
             dealer = self.dealer_hands[i]
             action = self.strategy.decide(dealer, player)
-            assert action == expected_action, f'player {player_type} {player_value}, ' \
-                                              f'dealer {dealer.cards[0].rank}'
+            check.equal(
+                action,
+                expected_action,
+                f'{player.value()} with {dealer.cards[0].rank}, should {action.name}',
+            )
+
+
+    def flatten(self, list):
+        return reduce(lambda a, b: a + b, list)
 
     # hard 5: hit against every dealer hand
     def test_player_hard_5(self):
@@ -105,4 +114,6 @@ class TestHand:
     # hard 11: double on everything
     def test_player_hard_11(self):
         player = Hand([Card(Ranks._2), Card(Ranks._9)])
+        assert player.value() == ('hard', 11)
+
         self.compare_actions(player, [Actions.DOUBLE] * 10)

@@ -7,6 +7,7 @@ setuptools.setup(name='blackjack',
                      'dev': [
                          'pycodestyle',
                          'pytest',
+                         'pytest-check',
                          'pytest-cov',
                         ]
                  })
