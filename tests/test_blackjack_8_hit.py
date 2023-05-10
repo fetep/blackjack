@@ -203,3 +203,87 @@ class TestHand:
         assert player.value() == ('hard', 20)
 
         self.compare_actions(player, [Actions.STAND] * 10)
+
+    # pair of 2s: hit against strong dealer hands (8+), split against the rest
+    def test_pair_2(self):
+        player = Hand([Card(Ranks._2), Card(Ranks._2)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.SPLIT] * 6,  # dealer 2-7
+            [Actions.HIT] * 4,    # dealer 8-A
+        ]))
+
+    # pair of 3s: hit against strong dealer hands (8+), split against the rest
+    def test_pair_3(self):
+        player = Hand([Card(Ranks._3), Card(Ranks._3)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.SPLIT] * 6,  # dealer 2-7
+            [Actions.HIT] * 4,    # dealer 8-A
+        ]))
+
+    # pair of 4s: split against the worst dealer hands (5, 6), hit against the rest
+    def test_pair_4(self):
+        player = Hand([Card(Ranks._4), Card(Ranks._4)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.HIT] * 3,    # dealer 2-4
+            [Actions.SPLIT] * 2,  # dealer 5-6
+            [Actions.HIT] * 5,    # dealer 7-A
+        ]))
+
+    # pair of 5s: hit against dealer (T, A), double against the rest (never split)
+    def test_pair_5(self):
+        player = Hand([Card(Ranks._5), Card(Ranks._5)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.DOUBLE] * 8,  # dealer 2-9
+            [Actions.HIT] * 2,     # dealer T-A
+        ]))
+
+    # pair of 6s: hit against made dealer hands (7+), split against the rest
+    def test_pair_6(self):
+        player = Hand([Card(Ranks._6), Card(Ranks._6)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.SPLIT] * 5,  # dealer 2-6
+            [Actions.HIT] * 5,    # dealer 7-A
+        ]))
+
+    # pair of 7s: hit against strong dealer hands (8+), split against the rest
+    def test_pair_7(self):
+        player = Hand([Card(Ranks._7), Card(Ranks._7)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.SPLIT] * 6,  # dealer 2-7
+            [Actions.HIT] * 4,    # dealer 8-A
+        ]))
+
+    # pair of 8s: always split
+    def test_pair_8(self):
+        player = Hand([Card(Ranks._8), Card(Ranks._8)])
+
+        self.compare_actions(player, [Actions.SPLIT] * 10)
+
+    # pair of 9s: stand against a dealer 7 (easy win) or T/A (good hand), split against the rest
+    def test_pair_9(self):
+        player = Hand([Card(Ranks._9), Card(Ranks._9)])
+
+        self.compare_actions(player, self.flatten([
+            [Actions.SPLIT] * 5,  # dealer 2-6
+            [Actions.STAND],      # dealer 7
+            [Actions.SPLIT] * 2,  # dealer 8-9
+            [Actions.STAND] * 2,  # dealer T-A
+        ]))
+
+    # pair of Ts: never split, always stand
+    def test_pair_A(self):
+        player = Hand([Card(Ranks._T), Card(Ranks._T)])
+
+        self.compare_actions(player, [Actions.STAND] * 10)
+
+    # pair of As: always split
+    def test_pair_A(self):
+        player = Hand([Card(Ranks._A), Card(Ranks._A)])
+
+        self.compare_actions(player, [Actions.SPLIT] * 10)

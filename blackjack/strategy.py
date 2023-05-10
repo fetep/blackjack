@@ -39,8 +39,24 @@ class Strategy:
             # deal with pairs
             if player.cards[0].rank == player.cards[1].rank:
                 match player.cards[0].rank:
-                    case Ranks._8:
-                        # always split 8s
+                    case Ranks._2 | Ranks._3 | Ranks._7:
+                        # split against dealer 17 and below
+                        if dealer_value <= 17:
+                            return Actions.SPLIT
+                    case Ranks._4:
+                        # split against dealer 15/16
+                        if 15 <= dealer_value <= 16:
+                            return Actions.SPLIT
+                    case Ranks._6:
+                        # split against dealer 16 and below
+                        if dealer_value <= 16:
+                            return Actions.SPLIT
+                    case Ranks._9:
+                        # always split except against 17 (we win) or 20/21 (take less risk)
+                        if dealer_value not in [17, 20, 21]:
+                            return Actions.SPLIT
+                    case Ranks._8 | Ranks._A:
+                        # always split
                         return Actions.SPLIT
 
             # double down when we have a hard value hand
@@ -52,7 +68,7 @@ class Strategy:
                             return Actions.DOUBLE
                     case 10:
                         # double 10 except against T/A
-                        if dealer_card.value() < 10 and dealer_card.rank != Ranks.A:
+                        if dealer_value < 20:
                             return Actions.DOUBLE
                     case 11:
                         # always double 11
