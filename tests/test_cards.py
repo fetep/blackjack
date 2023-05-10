@@ -31,6 +31,12 @@ class TestShoe:
         card_left = len([c for c in s.cards if c == card])
         assert card_left == 7
 
+    def test_pct_left(self):
+        s = Shoe(1)
+        for _ in range(26):
+            s.draw()
+        assert s.pct_left() == 50
+
     def test_shuffle(self):
         s = Shoe(1)
         for _ in range(10):
