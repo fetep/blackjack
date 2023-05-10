@@ -15,6 +15,11 @@ class Shoe:
         self.decks = decks
         self.shuffle()
 
+    def draw(self):
+        if len(self.cards) == 0:
+            raise ShoeException('out of cards')
+        return self.cards.pop()
+
     # re-populate our shoe with the specified number of decks and shuffle
     def shuffle(self):
         # populate self.cards with 1 deck
@@ -27,8 +32,3 @@ class Shoe:
         self.cards *= self.decks
 
         random.shuffle(self.cards)
-
-    def draw(self):
-        if len(self.cards) == 0:
-            raise ShoeException('out of cards')
-        return self.cards.pop()
