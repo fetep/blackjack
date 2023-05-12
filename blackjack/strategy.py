@@ -125,12 +125,7 @@ class Strategy:
 
             # if we are less than 17 and expected dealer value is >= 17, hit
             if player_value < 17 and dealer_value >= 17:
-                print(f'dealer_card={dealer_card} player={player.cards[0]} {player.cards[1]}, ' \
-                      f'player_value={player_value} dealer_value={dealer_value}, so returning HIT')
                 return Actions.HIT
-
-            print(f'dealer_card={dealer_card} player={player.cards[0]} {player.cards[1]}, ' \
-                  f'player_value={player_value} dealer_value={dealer_value}, so returning STAND')
 
         # if we didn't meet any of the above scenarios, just stand
         return Actions.STAND
