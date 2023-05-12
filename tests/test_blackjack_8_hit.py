@@ -287,3 +287,88 @@ class TestHand:
         player = Hand([Card(Ranks._A), Card(Ranks._A)])
 
         self.compare_actions(player, [Actions.SPLIT] * 10)
+
+    # soft 13: double against dealer 4/5/6, hit the rest
+    def test_soft_13(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._2)])
+        assert player.value() == ('soft', 13)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.HIT] * 2,     # dealer 2-3
+            [Actions.DOUBLE] * 3,  # dealer 4-6
+            [Actions.HIT] * 5,     # dealer 7-A
+        ]))
+
+    # soft 14: double against dealer 4/5/6, hit the rest
+    def test_soft_14(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._3)])
+        assert player.value() == ('soft', 14)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.HIT] * 2,     # dealer 2-3
+            [Actions.DOUBLE] * 3,  # dealer 4-6
+            [Actions.HIT] * 5,     # dealer 7-A
+        ]))
+
+    # soft 15: double against dealer 4/5/6, hit the rest
+    def test_soft_15(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._4)])
+        assert player.value() == ('soft', 15)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.HIT] * 2,     # dealer 2-3
+            [Actions.DOUBLE] * 3,  # dealer 4-6
+            [Actions.HIT] * 5,     # dealer 7-A
+        ]))
+
+    # soft 16: double against dealer 4/5/6, hit the rest
+    def test_soft_16(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._5)])
+        assert player.value() == ('soft', 16)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.HIT] * 2,     # dealer 2-3
+            [Actions.DOUBLE] * 3,  # dealer 4-6
+            [Actions.HIT] * 5,     # dealer 7-A
+        ]))
+
+    # soft 17: double up to a dealer 6, hit the rest
+    def test_soft_17(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._6)])
+        assert player.value() == ('soft', 17)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.DOUBLE] * 5, # dealer 2-6
+            [Actions.HIT] * 5,    # dealer 7-A
+        ]))
+
+    # soft 18: double against dealer 3/4/5/6, hit against dealer 19/20, stand the rest
+    def test_soft_18(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._7)])
+        assert player.value() == ('soft', 18)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.STAND] * 1,  # dealer 2
+            [Actions.DOUBLE] * 4, # dealer 3-6
+            [Actions.STAND] * 2,  # dealer 7-8
+            [Actions.HIT] * 2,    # dealer 9-10
+            [Actions.STAND] * 1,  # dealer A
+        ]))
+
+    # soft 19: double against dealer 6, stand the rest
+    def test_soft_19(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._8)])
+        assert player.value() == ('soft', 19)
+
+        self.compare_actions(player, self.flatten([
+            [Actions.STAND] * 4,  # dealer 2-5
+            [Actions.DOUBLE] * 1, # dealer 6
+            [Actions.STAND] * 5,  # dealer 7-A
+        ]))
+
+    # soft 20: stand
+    def test_soft_20(self):
+        player = Hand([Card(Ranks.A), Card(Ranks._9)])
+        assert player.value() == ('soft', 20)
+
+        self.compare_actions(player, [Actions.STAND] * 10)

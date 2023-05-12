@@ -74,8 +74,47 @@ class Strategy:
                         # always double 11
                         return Actions.DOUBLE
 
+        # soft value hands
+        # general rules:
+        # - always stand on soft 20
+        # - always stand on soft 19, except dealer 6 (get money in, double)
+        # - soft 18 or less, always double against 4/5/6
+        # - soft 17/18 can double against a 3
+        # - soft 17 can double against a 2
+        if player_type == 'soft':
+            if 13 <= player_value <= 16:
+                # double against the worst dealer hands, hit against the rest
+                if dealer_value in [14, 15, 16]:
+                    return Actions.DOUBLE
+                else:
+                    return Actions.HIT
+            elif player_value == 17:
+                # double against anything up to a dealer 16, hit the rest
+                if dealer_value <= 16:
+                    return Actions.DOUBLE
+                else:
+                    return Actions.HIT
+            elif player_value == 18:
+                # double against most bad dealer hands but not scary ones (12)
+                if dealer_value in [13, 14, 15, 16]:
+                    return Actions.DOUBLE
+
+                # since we're losing to dealer 19/20, hit
+                if dealer_value in [19, 20]:
+                    return Actions.HIT
+
+                # since we're losing to dealer 19/20, hit
+                if dealer_value in [19, 20]:
+                    return Actions.HIT
+            elif player_value == 19 and dealer_value == 16:
+                # 19 is good enough to stay with, except for a dealer 16 (double)
+                return Actions.DOUBLE
+            elif player_value == 20:
+                # always stand on soft 20
+                return Actions.STAND
+
         # hard value hands
-        if player_type == 'hard':
+        elif player_type == 'hard':
             if player_value <= 11:
                 # if we haven't hit the above double scenarios, hit any hand 11 or less.
                 return Actions.HIT
